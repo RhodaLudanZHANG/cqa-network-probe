@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>CQA Synthetic Firebase Canary</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Isolated synthetic test</p>
+        <h1>CQA Firebase-native school-network canary</h1>
+        <p>No real students, names, classroom data, scores, or custom CQA APIs.</p>
+      </div>
+      <label class="network-picker">
+        Network test label
+        <select id="network-label">
+          <option value="A">A</option>
+          <option value="J">J</option>
+          <option value="M">M</option>
+          <option value="Other">Other</option>
+        </select>
+      </label>
+    </header>
+
+    <main>
+      <section class="diagnostics" aria-labelledby="diagnostics-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Live diagnostics</p>
+            <h2 id="diagnostics-title">Network path</h2>
+          </div>
+          <div class="actions">
+            <button id="save-log" type="button">Save current result</button>
+            <button id="export-log" type="button">Export test log</button>
+          </div>
+        </div>
+        <dl class="status-grid">
+          <div><dt>Static frontend</dt><dd id="diag-static" data-state="fail">FAIL</dd></div>
+          <div><dt>Firebase Auth</dt><dd id="diag-auth">NOT TESTED</dd></div>
+          <div><dt>Auth restoration after refresh</dt><dd id="diag-auth-restore">NOT TESTED</dd></div>
+          <div><dt>Firestore principal read</dt><dd id="diag-principal">NOT TESTED</dd></div>
+          <div><dt>Runtime pointer read</dt><dd id="diag-pointer">NOT TESTED</dd></div>
+          <div><dt>Runtime read</dt><dd id="diag-runtime">NOT TESTED</dd></div>
+          <div><dt>Completion write</dt><dd id="diag-completion">NOT TESTED</dd></div>
+          <div><dt>Realtime listener</dt><dd id="diag-realtime" data-state="fail">FAILED</dd></div>
+          <div><dt>Last realtime event latency</dt><dd id="diag-latency">Not measured</dd></div>
+          <div><dt>Custom CQA API requests</dt><dd id="diag-api" data-state="pass">0 expected</dd></div>
+          <div><dt>Test start time</dt><dd id="diag-start">—</dd></div>
+          <div><dt>Elapsed duration</dt><dd id="diag-elapsed">00:00:00</dd></div>
+          <div><dt>Observed reconnect count</dt><dd id="diag-reconnects">0</dd></div>
+          <div><dt>Last successful activity</dt><dd id="diag-activity">Static page loaded</dd></div>
+          <div class="wide"><dt>Last error</dt><dd id="diag-error">None</dd></div>
+        </dl>
+        <p class="fine-print">Reconnect count is based on browser offline/online transitions followed by a server snapshot. No background writes are generated.</p>
+      </section>
+
+      <div id="fatal-config" class="fatal" role="alert" hidden>
+        Canary Firebase configuration is missing or unsafe. This page will not fall back to normal CQA Firebase.
+        <span id="fatal-config-category"></span>
+      </div>
+
+      <div class="panels">
+        <section class="panel" aria-labelledby="student-title">
+          <p class="eyebrow">Synthetic Student A · Synthetic Class A</p>
+          <h2 id="student-title">Student panel</h2>
+          <form id="student-login" class="login-form">
+            <label>Email <input id="student-email" type="email" autocomplete="username" required></label>
+            <label>Password <input id="student-password" type="password" autocomplete="current-password" required></label>
+            <button type="submit">Sign in Student A</button>
+          </form>
+          <div class="inline-actions">
+            <button id="student-signout" type="button" hidden>Sign out student</button>
+            <button id="student-reload" type="button" hidden>Reload classroom</button>
+          </div>
+          <p id="student-auth-state" class="notice">Not signed in.</p>
+          <div id="student-runtime" hidden>
+            <p><strong>Session:</strong> <span id="student-session">Synthetic Session A</span></p>
+            <p><strong>Current Part:</strong> <span id="student-part">—</span></p>
+            <div id="choices-task" class="task-card"></div>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="teacher-title">
+          <p class="eyebrow">Synthetic Teacher A · Synthetic Class A</p>
+          <h2 id="teacher-title">Teacher panel</h2>
+          <form id="teacher-login" class="login-form">
+            <label>Email <input id="teacher-email" type="email" autocomplete="username" required></label>
+            <label>Password <input id="teacher-password" type="password" autocomplete="current-password" required></label>
+            <button type="submit">Sign in Teacher A</button>
+          </form>
+          <div class="inline-actions">
+            <button id="teacher-signout" type="button" hidden>Sign out teacher</button>
+            <button id="fresh-run" type="button" hidden>Prepare fresh test run</button>
+          </div>
+          <p id="teacher-auth-state" class="notice">Not signed in.</p>
+          <div id="teacher-runtime" hidden>
+            <p class="fine-print">One real Firestore listener watches the current Part completion collection.</p>
+            <ul class="roster">
+              <li><span>Synthetic Student A</span><strong id="student-a-status">Incomplete</strong></li>
+              <li><span>Synthetic Student B</span><strong id="student-b-status">Incomplete</strong></li>
+            </ul>
+            <p id="fresh-run-note" class="notice">Use “Prepare fresh test run” before repeating the write test on another network, then reload the student classroom.</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      Phase 3A.5 canary · local-only diagnostic log · completion is not a score or proof of correctness
+    </footer>
+    <script src="./config.js"></script>
+    <script type="module" src="./canary.js"></script>
+  </body>
+</html>
